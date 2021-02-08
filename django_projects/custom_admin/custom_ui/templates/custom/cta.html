@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        function addCourse() {
+            console.log("added")
+
+            $.ajax({
+                "url": URL,
+                "data": {
+                    "name": $("#name").val(),
+                    "email_id": $("#email_id").val(),
+                    "page_url": $("#page_url").val(),
+                    'csrfmiddlewaretoken': $(".add-employee").find('input[name=csrfmiddlewaretoken]').val()
+
+                },
+                "type": "post",
+                "headers": {
+                    "X-CSRFToken": $(".add-employee").find('input[name=csrfmiddlewaretoken]').val()
+
+                },
+                "success": add_success,
+                "error": add_error
+
+            }); // ajax()
+
+        }
+
+        function add_success() {
+            alert("Added course Successfully");
+        }
+
+        function add_error() {
+            alert("Could not add course!");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Contact Form</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="name">Your name: </label>
+        <input id="name" type="text" name="name">
+
+        <label for="email_id">email: </label>
+        <input id="email_id" type="text" name="email_id">
+
+        <input type="submit" value="OK">
+    </form>
+
+
+
+</body>
+
+</html>
